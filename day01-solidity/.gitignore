@@ -1,0 +1,66 @@
+# Compiler files
+cache/
+out/
+
+# Ignores development broadcast logs
+!/broadcast
+/broadcast/*/31337/
+/broadcast/**/dry-run/
+
+# Docs
+docs/
+
+# Dotenv file
+.env
+
+
+No files changed, compilation skipped
+# Deployer: 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 CONTRACT_ADDRESS
+# Deployed to: 0x359d73F8708a2706c70c38e7A9404Dae0c49Ce74 profile adress
+Transaction hash: 0xd92d7b9fa8a79910bf0bda6b5a97f2fafa0373e29fe0e88579f1f994e72a5bfe
+
+cast send 0x359d73F8708a2706c70c38e7A9404Dae0c49Ce74 "createProfile(string)" "MyHackerName" \
+  --rpc-url $RPC_URL \
+  --private-key $PRIVATE_KEY
+
+  cast call 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 "halfAnswerOfLife()" --rpc-url $RPC_URL
+
+  # For ProfileSystem's profiles mapping
+cast call 0x359d73F8708a2706c70c38e7A9404Dae0c49Ce74 "profiles(address)" 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 \
+  --rpc-url $RPC_URL
+
+cast send 0x359d73F8708a2706c70c38e7A9404Dae0c49Ce74 "levelUp()" \
+  --rpc-url $RPC_URL \
+  --private-key $PRIVATE_KEY
+
+cast send 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 "editMyCity(string)" "New York" \
+  --rpc-url $RPC_URL \
+  --private-key $PRIVATE_KEY
+
+cast send 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 "addToBalance()" \
+  --value 0.01ether \
+  --rpc-url $RPC_URL \
+  --private-key $PRIVATE_KEY
+
+  cast call 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 "getMyBalance()" --rpc-url $RPC_URL
+
+
+  cast storage 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 0 --rpc-url $RPC_URL
+cast storage 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 1 --rpc-url $RPC_URL
+
+➜  day01-solidity git:(master) ✗ cast --abi-decode "profiles(address)(uint64,uint32,uint8,string)" 0x0000000000000000000000000000000000000000000000000000000000000004000000000000000000000000000000000000000000000000000000006981232800000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000000000000000000000000000000000080000000000000000000000000000000000000000000000000000000000000000c4d794861636b65724e616d650000000000000000000000000000000000000000
+4
+1770070824 [1.77e9]
+1
+"MyHackerName"
+
+
+cast send 0x2Ac5519FBaE5A2bC547Aa72b5aDa6256576fcd57 "withdrawFromBalance()" \
+  --value 0.02ether \
+  --rpc-url $RPC_URL \
+  --private-key $PRIVATE_KEY
+
+  cast keccak
+
+  ➜  day01-solidity git:(master) ✗ cast keccak "Hello World"
+0x592fa743889fc7f92ac2a37bb1f5ba1daf2a5c84741ca0e0061d243a2e6707ba
