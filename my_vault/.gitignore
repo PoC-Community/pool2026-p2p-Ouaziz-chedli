@@ -12,3 +12,6 @@ docs/
 
 # Dotenv file
 .env
+
+./my_vault/app/node_modules
+

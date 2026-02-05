@@ -1,4 +1,4 @@
-// SPDX-License-Identifier: UNLICENSED
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 import {Test} from "forge-std/Test.sol";
@@ -66,7 +66,7 @@ contract VaultTest is Test {
         vm.startPrank(user);
         token.approve(address(vault), depositAmount);
         vault.deposit(depositAmount);
-        vm.stopPrank(); 
+        vm.stopPrank();
 
         // Then, owner adds reward
         uint256 rewardAmount = 100 ether;

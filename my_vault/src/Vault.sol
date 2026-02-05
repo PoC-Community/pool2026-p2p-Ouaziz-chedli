@@ -54,7 +54,15 @@ contract Vault is ReentrancyGuard, Ownable {
         return shares;
     }
 
-    function withdraw(uint256 shares) public nonReentrant returns (uint256) {
+    function withdraw(uint256 shares) external nonReentrant returns (uint256) {
+        return _withdraw(shares);
+    }
+
+    function withdrawAll() external nonReentrant returns (uint256) {
+        return _withdraw(sharesOf[msg.sender]);
+    }
+
+    function _withdraw(uint256 shares) internal returns (uint256) {
         if (shares == 0) revert ZeroShares();
         uint256 msgSenderShares = sharesOf[msg.sender];
         if (msgSenderShares < shares) revert InsufficientShares();
@@ -64,10 +72,6 @@ contract Vault is ReentrancyGuard, Ownable {
         asset.safeTransfer(msg.sender, assets);
         emit Withdraw(msg.sender, assets, shares);
         return assets;
-    }
-
-    function withdrawAll() public returns (uint256) {
-        return withdraw(sharesOf[msg.sender]);
     }
 
     function previewDeposit(uint256 assets) public view returns (uint256) {
@@ -102,13 +106,10 @@ contract Vault is ReentrancyGuard, Ownable {
         return assets;
     }
 
-    function addReward(
-        uint256 amount
-    ) external onlyOwner nonReentrant returns (uint256) {
+    function addReward(uint256 amount) external onlyOwner nonReentrant {
         if (amount == 0) revert ZeroAmount();
         if (totalShares == 0) revert ZeroShares();
         asset.safeTransferFrom(msg.sender, address(this), amount);
         emit RewardAdded(amount);
-        return amount;
     }
 }
